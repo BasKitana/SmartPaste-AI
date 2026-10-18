@@ -6,7 +6,7 @@ A Windows C++ learning project that answers copied questions through a local Oll
 
 [![Animated SmartPaste AI demo: copy a question, trigger Ctrl+Shift+A, and insert an answer](docs/media/SmartPaste-AI-preview.gif)](docs/media/SmartPaste-AI-demo.mp4)
 
-**[Watch the 20-second demo](docs/media/SmartPaste-AI-demo.mp4)** · 1080p with vocals-only humming; no instrumental soundtrack. The video illustrates the workflow with condensed timing. [Audio credit and reuse terms](docs/media/AUDIO-CREDITS.md).
+**[Watch the 20-second demo](docs/media/SmartPaste-AI-demo.mp4)** · 1080p with mouse clicks and keyboard taps only; no music, humming, or vocals. The video illustrates the workflow with condensed timing. [Audio credit and reuse terms](docs/media/AUDIO-CREDITS.md).
 
 The animated preview plays directly in this README without sound. Open the full video above for audio.
 
