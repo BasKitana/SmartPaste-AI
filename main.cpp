@@ -263,8 +263,8 @@ int main(int argc, char* argv[]) {
     RegisterClassW(&windowClass);
     HWND window = CreateWindowW(windowClass.lpszClassName, L"SmartPaste AI", 0,
         0, 0, 0, 0, nullptr, nullptr, module, nullptr);
-    if (!window || !RegisterHotKey(window, 1, MOD_CONTROL | MOD_ALT | MOD_NOREPEAT, 'A')) {
-        MessageBoxW(nullptr, L"Cannot register Ctrl+Alt+A. Another program may own it.", L"SmartPaste AI", MB_OK | MB_ICONERROR);
+    if (!window || !RegisterHotKey(window, 1, MOD_CONTROL | MOD_SHIFT | MOD_NOREPEAT, 'A')) {
+        MessageBoxW(nullptr, L"Cannot register Ctrl+Shift+A. Another program may own it.", L"SmartPaste AI", MB_OK | MB_ICONERROR);
         if (window) DestroyWindow(window);
         CloseHandle(instance);
         return 1;
@@ -275,7 +275,7 @@ int main(int argc, char* argv[]) {
     tray.uFlags = NIF_ICON | NIF_MESSAGE | NIF_TIP;
     tray.uCallbackMessage = TrayMessage;
     tray.hIcon = LoadIconW(nullptr, MAKEINTRESOURCEW(32512));
-    wcscpy_s(tray.szTip, L"SmartPaste AI - Ctrl+Alt+A; right-click to quit");
+    wcscpy_s(tray.szTip, L"SmartPaste AI - Ctrl+Shift+A; right-click to quit");
     if (!Shell_NotifyIconW(NIM_ADD, &tray)) {
         MessageBoxW(nullptr, L"Cannot create tray icon.", L"SmartPaste AI", MB_OK | MB_ICONERROR);
         DestroyWindow(window);
@@ -283,8 +283,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     SetTimer(window, 1, 100, nullptr);
-    logEvent("Started; Ctrl+Alt+A registered");
-    notify(L"Ready. Copy a question, select a text field, press Ctrl+Alt+A. Right-click tray icon to quit.");
+    logEvent("Started; Ctrl+Shift+A registered");
+    notify(L"Ready. Copy a question, select a text field, press Ctrl+Shift+A. Right-click tray icon to quit.");
     ShowWindow(GetConsoleWindow(), SW_HIDE);
     MSG message;
     while (GetMessageW(&message, nullptr, 0, 0) > 0) {

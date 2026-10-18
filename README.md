@@ -1,6 +1,14 @@
-﻿# SmartPaste AI
+# SmartPaste AI
 
 A Windows C++ learning project that answers copied questions through a local Ollama model and types the answer into the active application.
+
+## Demo
+
+[![Animated SmartPaste AI demo: copy a question, trigger Ctrl+Shift+A, and insert an answer](docs/media/SmartPaste-AI-preview.gif)](docs/media/SmartPaste-AI-demo.mp4)
+
+**[Watch the 20-second demo](docs/media/SmartPaste-AI-demo.mp4)** · 1080p with vocals-only humming; no instrumental soundtrack. The video illustrates the workflow with condensed timing. [Audio credit and reuse terms](docs/media/AUDIO-CREDITS.md).
+
+The animated preview plays directly in this README without sound. Open the full video above for audio.
 
 ## Speed and answer accuracy
 
@@ -17,12 +25,28 @@ These are instructions, not guarantees. SmartPaste does not verify answers, and 
 
 No API key or per-request cloud API payment is required for this local configuration. You still need sufficient disk space and memory for the model.
 
-## Build and run
+## Build (first time, or after code changes)
 
 1. Open the project from an x64 Visual Studio Developer Command Prompt so `cl.exe` is available. For VS Code, run `code .` from that prompt.
 2. Create a `build` folder in the project root if it does not exist.
 3. In VS Code, press Ctrl+Shift+B and select **Build SmartPaste AI**. The executable is `build/main.exe`.
-4. Double-click the executable in Windows File Explorer, or run it from a terminal:
+
+For debugging, select **Debug SmartPaste AI** and press F5. Only one instance can run; quit the tray instance before debugging or rebuilding. The executable is generated locally; it is not included in this source repository.
+
+## Start the program
+
+After building, launch SmartPaste once per Windows session:
+
+1. Open the project folder in **Windows File Explorer**.
+2. Open **build** and double-click **main.exe**. No terminal is required.
+3. Look for the SmartPaste icon in the system tray, possibly under **hidden icons** (`^`). No main window opens.
+4. Copy a question with **Ctrl+C**, click a text field in Notepad, then press **Ctrl+Shift+A** and release the keys. Keep the field selected while the answer generates.
+
+SmartPaste stays running in the tray; you do not need to launch it for every question. It starts Ollama on demand if installed in the default location. The model must already be downloaded. Launch SmartPaste again after restarting Windows; automatic startup is not configured.
+
+To quit, right-click its tray icon and choose **Quit SmartPaste AI**. After editing the prompt or code, quit, rebuild, and start the new executable.
+
+Alternatively, run one of these commands **from the project folder**:
 
 PowerShell:
 
@@ -36,14 +60,12 @@ WSL/Bash with Windows executable interoperability enabled:
 ./build/main.exe
 ```
 
-For debugging, select **Debug SmartPaste AI** and press F5. Only one instance can run; quit the tray instance before debugging or rebuilding.
-
 ## Use
 
 1. Copy a question using Ctrl+C.
 2. Click the destination text field. Start with Windows Notepad.
-3. Press Ctrl+Alt+A and release the keys. SmartPaste reads the clipboard, generates an answer, saves it in memory, and attempts to type it into the application active when generation finishes.
-4. Press Ctrl+Alt+A again with the same clipboard text to insert the saved answer without another model request.
+3. Press Ctrl+Shift+A and release the keys. SmartPaste reads the clipboard, generates an answer, saves it in memory, and attempts to type it into the application active when generation finishes.
+4. Press Ctrl+Shift+A again with the same clipboard text to insert the saved answer without another model request.
 
 Changing clipboard text starts a new generation. The cache holds one successful question/answer pair and lasts until exit. Extra shortcut presses during generation are ignored. Clipboard contents are preserved. Failed generation inserts nothing; the next press retries. Tray notifications report status and errors, subject to Windows notification settings.
 
@@ -63,7 +85,7 @@ The system prompt is inside `generate()` in `main.cpp`. After editing, save, qui
 
 ## Troubleshooting
 
-If the shortcut does nothing, check that `main.exe` is running, the tray icon exists, and another app has not claimed Ctrl+Alt+A. Try left Ctrl + left Alt + A in Windows Notepad. Check `build/smartpaste.log` for hotkey, request, and input-delivery events. The log does not deliberately record question or answer contents, but errors may contain diagnostic details.
+If the shortcut does nothing, check that `main.exe` is running, the tray icon exists, and another app has not claimed Ctrl+Shift+A. Try left Ctrl + left Shift + A in Windows Notepad. Check `build/smartpaste.log` for hotkey, request, and input-delivery events. The log does not deliberately record question or answer contents, but errors may contain diagnostic details.
 
 Diagnostic commands do not read the clipboard or inject keyboard input:
 
