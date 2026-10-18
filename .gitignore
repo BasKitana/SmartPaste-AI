@@ -1,8 +1,8 @@
 /build/
 *.obj
-*.exe
-*.ilk
 *.pdb
+*.ilk
+*.exe
 .env
 .env.*
 !.env.example

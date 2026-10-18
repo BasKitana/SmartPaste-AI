@@ -2,15 +2,17 @@
     "tasks":  [
                   {
                       "type":  "cppbuild",
-                      "label":  "C/C++: cl.exe build active file",
+                      "label":  "Build SmartPaste AI",
                       "command":  "cl.exe",
                       "args":  [
+                                   "/std:c++17",
                                    "/Zi",
                                    "/EHsc",
                                    "/nologo",
-                                   "/Fe${workspaceFolder}\\build\\${fileBasenameNoExtension}.exe",
-                                   "${file}",
-                                   "User32.lib"
+                                   "/Fe${workspaceFolder}\\build\\main.exe",
+                                   "${workspaceFolder}\\main.cpp",
+                                   "User32.lib",
+                                   "Shell32.lib"
                                ],
                       "options":  {
                                       "cwd":  "${workspaceFolder}\\build"
