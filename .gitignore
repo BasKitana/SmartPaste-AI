@@ -7,5 +7,7 @@
 .env.*
 !.env.example
 
-# Vocal source is licensed for use inside videos, not standalone redistribution.
-/brag-output/composition/assets/vocals/
+# Keep local video-generation tooling and workspaces out of the app repository.
+/.agents/skills/brag/
+/brag-output/
+/brag-output-*/
